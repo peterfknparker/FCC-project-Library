@@ -76,9 +76,9 @@ module.exports = function (app) {
 
 			Book.find({ _id: id }, function (err, book) {
 				if (!err && book) {
-					res.send(book);
+					return res.send(book);
 				} else if (!book) {
-					res.send("no book exists");
+					return res.send("no book exists");
 				}
 			});
 		})
@@ -100,7 +100,7 @@ module.exports = function (app) {
 				{ new: true },
 				function (err, updated) {
 					if (err) return res.send("no book exists");
-					res.json(updated);
+					return res.json(updated);
 				}
 			);
 		})
