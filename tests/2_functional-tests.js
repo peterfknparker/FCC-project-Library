@@ -120,7 +120,7 @@ suite("Functional Tests", function () {
 					.get("/api/books/" + firstBookId)
 					.end(function (err, res) {
 						assert.equal(res.type, "application/json", "json");
-						assert.containsAllKeys(res.body[0], ["_id", "title", "comments"]);
+						assert.containsAllKeys(res.body, ["_id", "title", "comments"]);
 						done();
 					});
 				//done();

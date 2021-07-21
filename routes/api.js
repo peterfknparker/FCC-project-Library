@@ -74,13 +74,9 @@ module.exports = function (app) {
 				return res.send("no book exists");
 			}
 
-			Book.find({ _id: id }, function (err, book) {
+			Book.findById({ _id: id }, function (err, book) {
 				if (!err && book) {
-					return res.json({
-						title: updated.title,
-						_id: updated._id,
-						comments: updated.comments,
-					});
+					return res.json(book);
 				} else if (!book) {
 					return res.send("no book exists");
 				}
@@ -98,17 +94,13 @@ module.exports = function (app) {
 				return res.send("missing required field comment");
 			}
 
-			Book.findOneAndUpdate(
+			Book.findByIdAndUpdate(
 				{ _id: id },
 				{ $push: { comments: comment } },
 				{ new: true },
 				function (err, updated) {
 					if (err) return res.send("no book exists");
-					return res.json({
-						title: updated.title,
-						_id: updated._id,
-						comments: updated.comments,
-					});
+					return res.json(updated);
 				}
 			);
 		})
