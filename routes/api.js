@@ -111,9 +111,12 @@ module.exports = function (app) {
 			if (!id) {
 				return res.send("no book exists");
 			}
-			Book.findOneAndDelete({ _id: id }, function (err) {
-				if (err) return res.send("no book exists");
-				return res.send("delete successful");
+			Book.findOneAndDelete({ _id: id }, function (err, deleted) {
+				if (!err && deleted) {
+					res.json("delete successful");
+				} else if (!deleted) {
+					res.send("no book exists");
+				}
 			});
 		});
 };
