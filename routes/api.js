@@ -99,8 +99,11 @@ module.exports = function (app) {
 				{ $push: { comments: comment } },
 				{ new: true },
 				function (err, updated) {
-					if (err) return res.send("no book exists");
-					return res.json(updated);
+					if (!err && updated) {
+						return res.json(updated);
+					} else if (!updated) {
+						return res.send("no book exists");
+					}
 				}
 			);
 		})
