@@ -113,7 +113,7 @@ module.exports = function (app) {
 			}
 			Book.findOneAndDelete({ _id: id }, function (err, deleted) {
 				if (!err && deleted) {
-					res.json("delete successful");
+					res.send("delete successful");
 				} else if (!deleted) {
 					res.send("no book exists");
 				}
