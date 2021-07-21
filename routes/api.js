@@ -76,7 +76,7 @@ module.exports = function (app) {
 
 			Book.find({ _id: id }, function (err, book) {
 				if (!err && book) {
-					res.json(book);
+					res.send(book);
 				} else if (!book) {
 					res.send("no book exists");
 				}
